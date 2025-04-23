@@ -1,0 +1,36 @@
+###
+POST http://localhost:3005/encontros
+Content-Type: application/json
+
+{
+    "ficha_id": 1,
+    "nome": "Robert Wolf",
+    "habilidade": "6",
+    "energia": "12",
+    "observacao": "",
+    "status": "pending",
+    "published": 1
+}
+
+###
+GET http://localhost:3005/encontros
+
+###
+GET http://localhost:3005/encontros/related
+
+
+###
+GET http://localhost:3005/encontros/1
+
+###
+DELETE http://localhost:3005/encontros/1
+
+###
+//PUT objeto inteiro
+//PATCH alguns atributos
+PATCH http://localhost:3005/encontros/1
+Content-Type: application/json
+
+{   
+    "habilidade": "6"
+}

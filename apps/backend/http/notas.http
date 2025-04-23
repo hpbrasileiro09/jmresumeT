@@ -1,0 +1,33 @@
+###
+POST http://localhost:3005/notas
+Content-Type: application/json
+
+{
+    "ficha_id": 1,
+    "descricao": "Born",
+    "observacao": "",
+    "published": 1
+}
+
+###
+GET http://localhost:3005/notas
+
+###
+GET http://localhost:3005/notas/related
+
+
+###
+GET http://localhost:3005/notas/1
+
+###
+DELETE http://localhost:3005/notas/1
+
+###
+//PUT objeto inteiro
+//PATCH alguns atributos
+PATCH http://localhost:3005/notas/1
+Content-Type: application/json
+
+{   
+    "habilidade": "6"
+}

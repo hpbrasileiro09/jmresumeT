@@ -1,0 +1,122 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["relationJoins", "strictUndefinedChecks"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL_MY")
+}
+
+/*
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL_LITE")
+}
+*/
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String
+  password  String
+  name      String
+}
+
+model Entry {
+  id              Int   @id @default(autoincrement())
+  category        Category  @relation(fields: [category_id], references: [id])
+  category_id     Int @default(0)
+  dt_entry        DateTime
+  vl_entry        Float
+  nm_entry        String?
+  ds_category     String?
+  ds_subcategory  String?
+  status          Int
+  fixed_costs     Int
+  checked         Int
+  published       Int
+  ds_detail       String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now())
+  mysql_id        Int
+  @@map("entries")
+}
+
+model Category {
+  id              Int @id @default(autoincrement())
+  name            String
+  published       Int
+  vl_prev         Float
+  day_prev        Int
+  ordem           Int
+  type            String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now())
+  entries         Entry[]
+  @@map("categories")
+}
+
+model Param {
+  id              Int @id @default(autoincrement())
+  label           String
+  value           String
+  default         String
+  dt_params       DateTime
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now())
+  type            String
+  mysql_id        Int
+  @@map("params")
+}
+
+model Ficha {
+  id              Int @id @default(autoincrement())
+  nome            String
+  habilidade      String
+  energia         String
+  sorte           String
+  provisoes       String
+  transformacao   String
+  equipamentos    String
+  outro           String
+  notas_senhas    String
+  observacao      String
+  published       Int
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now())
+  encontros       Encontro[]
+  notas           Nota[]
+  @@map("fichas")
+}
+
+model Nota {
+  id              Int   @id @default(autoincrement())
+  ficha           Ficha  @relation(fields: [ficha_id], references: [id])
+  ficha_id        Int @default(0)
+  descricao       String
+  observacao      String
+  published       Int
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now())
+  @@map("notas")
+}
+
+model Encontro {
+  id              Int   @id @default(autoincrement())
+  ficha           Ficha  @relation(fields: [ficha_id], references: [id])
+  ficha_id        Int @default(0)
+  nome            String
+  habilidade      String
+  energia         String
+  observacao      String
+  status          String 
+  published       Int
+  em_combate      Int @default(0)
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now())
+  @@map("encontros")
+}

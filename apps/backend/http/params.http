@@ -1,0 +1,34 @@
+###
+POST http://localhost:3005/params
+Content-Type: application/json
+
+{
+    "label": "agora",
+    "value": "2024-11-16T10:11:00Z",
+    "default": "",
+    "dt_params": "2024-11-16T10:11:00Z",
+    "type": "datetime"
+}
+
+###
+GET http://localhost:3005/params
+
+
+###
+GET http://localhost:3005/params/1
+
+###
+GET http://localhost:3005/params/label/agora
+
+###
+DELETE http://localhost:3005/params/1
+
+###
+//PUT objeto inteiro
+//PATCH alguns atributos
+PATCH http://localhost:3005/params/1
+Content-Type: application/json
+
+{   
+    "default": "2024-11-15T10:11:00Z"
+}

@@ -1,0 +1,40 @@
+###
+POST http://localhost:3005/fichas
+Content-Type: application/json
+
+{
+    "nome": "Robert Wolf",
+    "habilidade": "6",
+    "energia": "12",
+    "sorte": "3",
+    "provisoes": "3",
+    "transformacao": "3",
+    "equipamentos": "faca, mochila",
+    "outro": "",
+    "notas_senhas": "",
+    "observacao": "",
+    "published": 1
+}
+
+###
+GET http://localhost:3005/fichas
+
+###
+GET http://localhost:3005/fichas/related
+
+
+###
+GET http://localhost:3005/fichas/1
+
+###
+DELETE http://localhost:3005/fichas/1
+
+###
+//PUT objeto inteiro
+//PATCH alguns atributos
+PATCH http://localhost:3005/fichas/1
+Content-Type: application/json
+
+{   
+    "habilidade": "6"
+}
