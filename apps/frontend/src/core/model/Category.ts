@@ -1,4 +1,6 @@
 
+import { Entry } from "./Entry"
+
 export interface Category {
     id: number
     name: string
@@ -9,4 +11,5 @@ export interface Category {
     created_at:  Date
     updated_at:  Date
     published: number     
+    entries?: Entry[]
 }

@@ -77,6 +77,21 @@ export default function Sidebar() {
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Link 
+                                href="report"
+                                className="flex h-9 w-9 shrink-0 items-center 
+                                justify-center rounded-lg text-muted-foreground
+                                transition-colors hover:text-foreground"
+                                >
+                                    <Package className="h-5 w-5" />
+                                    <span className="sr-only">Report</span>
+                                </Link>                                
+                            </TooltipTrigger>
+                            <TooltipContent side="right">Report</TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link 
                                 href="settings"
                                 className="flex h-9 w-9 shrink-0 items-center 
                                 justify-center rounded-lg text-muted-foreground

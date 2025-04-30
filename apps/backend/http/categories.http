@@ -15,6 +15,15 @@ Content-Type: application/json
 GET http://localhost:3005/categories
 
 ###
+GET http://localhost:3005/categories/related/credit/2025
+
+###
+GET http://localhost:3005/categories/related/debit/2025
+
+###
+GET http://localhost:3005/categories/temp/2025
+
+###
 GET http://localhost:3005/categories/related
 
 

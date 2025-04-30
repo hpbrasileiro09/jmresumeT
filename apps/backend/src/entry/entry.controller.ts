@@ -43,6 +43,68 @@ export class EntryController {
     });
   }
 
+  @Get('/related/credit/:ano')
+  findManyRelatedCredit(@Param('ano') ano: string): any {
+    const iano = (parseInt(ano) + 1).toString();
+    const dt_ini = ano + '-01-01T23:59:59.000Z';
+    const dt_fim = iano + '-01-01T00:00:00.000Z';
+    return this.prisma.findManyRelated('entry', {
+      //relationLoadStrategy: 'join', // or 'query'
+      include: {
+        category: true,
+      },
+      orderBy: {
+        dt_entry: 'asc',
+      },
+      where: {
+        status: {
+          equals: 1,
+        },
+        published: {
+          equals: 1,
+        },
+        dt_entry: {
+          gte: dt_ini,
+          lte: dt_fim,
+        },
+        vl_entry: {
+          gte: 0.0,
+        },
+      },
+    });
+  }
+
+  @Get('/related/debit/:ano')
+  findManyRelatedDebit(@Param('ano') ano: string): any {
+    const iano = (parseInt(ano) + 1).toString();
+    const dt_ini = ano + '-01-01T23:59:59.000Z';
+    const dt_fim = iano + '-01-01T00:00:00.000Z';
+    return this.prisma.findManyRelated('entry', {
+      //relationLoadStrategy: 'join', // or 'query'
+      include: {
+        category: true,
+      },
+      orderBy: {
+        dt_entry: 'asc',
+      },
+      where: {
+        status: {
+          equals: 1,
+        },
+        published: {
+          equals: 1,
+        },
+        dt_entry: {
+          gte: dt_ini,
+          lte: dt_fim,
+        },
+        vl_entry: {
+          lt: 0.0,
+        },
+      },
+    });
+  }
+
   @Get('/byparam/:dt_entry')
   findManyByParam(@Param('dt_entry') dt_entry: string): any {
     return this.prisma.findManyRelated('entry', {
@@ -69,6 +131,26 @@ export class EntryController {
         },
         dt_entry: {
           lte: dt_entry + 'T23:59:59.000Z',
+        },
+      },
+      _sum: {
+        vl_entry: true,
+      },
+    });
+  }
+
+  @Get('/sum/:ano')
+  findManySum(@Param('ano') ano: string): any {
+    const dt_ini = '2009-12-20T00:00:00.000Z';
+    const dt_fim = ano + '-01-01T00:00:00.000Z';
+    return this.prisma.entry.aggregate({
+      where: {
+        status: {
+          equals: 1,
+        },
+        dt_entry: {
+          gte: dt_ini,
+          lte: dt_fim,
         },
       },
       _sum: {
