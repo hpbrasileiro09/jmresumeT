@@ -3,7 +3,6 @@ import { Entry } from '@/core/model/Entry'
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableFooter,
     TableHead,

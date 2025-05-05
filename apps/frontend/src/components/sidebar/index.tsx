@@ -6,7 +6,7 @@ import {
   } from "@/components/ui/sheet"
 import { Button } from "../ui/button"
 import Link from 'next/link'
-import { Package, PanelBottom, Home, ShoppingBag, Users, Settings, LogOut, UserCircle, UserRound, DramaIcon, Edit3Icon, BookAIcon, RocketIcon, Rocket, Book, Swords, DollarSign } from "lucide-react"
+import { Wrench, Calendar, Package, PanelBottom, Home, ShoppingBag, Users, Settings, LogOut, UserCircle, UserRound, DramaIcon, Edit3Icon, BookAIcon, RocketIcon, Rocket, Book, Swords, DollarSign } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip"
 
 export default function Sidebar() {
@@ -82,11 +82,41 @@ export default function Sidebar() {
                                 justify-center rounded-lg text-muted-foreground
                                 transition-colors hover:text-foreground"
                                 >
-                                    <Package className="h-5 w-5" />
+                                    <Book className="h-5 w-5" />
                                     <span className="sr-only">Report</span>
                                 </Link>                                
                             </TooltipTrigger>
                             <TooltipContent side="right">Report</TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link 
+                                href="times"
+                                className="flex h-9 w-9 shrink-0 items-center 
+                                justify-center rounded-lg text-muted-foreground
+                                transition-colors hover:text-foreground"
+                                >
+                                    <Calendar className="h-5 w-5" />
+                                    <span className="sr-only">Times</span>
+                                </Link>                                
+                            </TooltipTrigger>
+                            <TooltipContent side="right">Times</TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link 
+                                href="support"
+                                className="flex h-9 w-9 shrink-0 items-center 
+                                justify-center rounded-lg text-muted-foreground
+                                transition-colors hover:text-foreground"
+                                >
+                                    <Wrench className="h-5 w-5" />
+                                    <span className="sr-only">Support</span>
+                                </Link>                                
+                            </TooltipTrigger>
+                            <TooltipContent side="right">Support</TooltipContent>
                         </Tooltip>
 
                         <Tooltip>

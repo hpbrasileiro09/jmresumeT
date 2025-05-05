@@ -88,6 +88,9 @@ GET http://localhost:3005/entries/related/debit/2025
 GET http://localhost:3005/entries/byparam/2025-04-18
 
 ###
+GET http://localhost:3005/entries/search/nothing/dt_search/2025-04-18
+
+###
 GET http://localhost:3005/entries/sumvlentry/2025-04-18
 
 ###

@@ -122,6 +122,49 @@ export class EntryController {
     });
   }
 
+  @Get('/search/:search/dt_search/:dt_search')
+  findManySearch(
+    @Param('search') search: string,
+    @Param('dt_search') dt_search: string,
+  ): any {
+    const dt_ini = dt_search;
+    const dt_fim = dt_search.substring(0, 10) + 'T23:59:59.000Z';
+    if (search.length > 0 && search != 'nothing') {
+      return this.prisma.findManyRelated('entry', {
+        include: {
+          category: true,
+        },
+        orderBy: [{ dt_entry: 'asc' }, { vl_entry: 'desc' }],
+        where: {
+          OR: [
+            { ds_category: { contains: search } },
+            { ds_subcategory: { contains: search } },
+            {
+              category: {
+                name: {
+                  contains: search,
+                },
+              },
+            },
+          ],
+        },
+      });
+    } else {
+      return this.prisma.findManyRelated('entry', {
+        include: {
+          category: true,
+        },
+        orderBy: [{ dt_entry: 'asc' }, { vl_entry: 'desc' }],
+        where: {
+          dt_entry: {
+            gte: dt_ini,
+            lte: dt_fim,
+          },
+        },
+      });
+    }
+  }
+
   @Get('/sumvlentry/:dt_entry')
   findManySumVlEntry(@Param('dt_entry') dt_entry: string): any {
     return this.prisma.entry.aggregate({

@@ -7,7 +7,7 @@ export default function useTimes() {
 
     const [day, setDay] = useState("15")
     const [month, setMonth] = useState("11")
-    const [year, setYear] = useState("2024")
+    const [year, setYear] = useState("2025")
     const [card, setCard] = useState("visa")
     const [time, setTime] = useState("2")
     const [category_id, setCategoryId] = useState("1")

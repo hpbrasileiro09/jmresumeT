@@ -37,7 +37,7 @@ export default function Graph(props: GraphProps) {
     } satisfies ChartConfig
 
     return (
-        <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+        <ChartContainer config={chartConfig} className="min-h-[400px] w-full">
             <BarChart data={props.chartData}>
                 <CartesianGrid vertical={false} />
                 <XAxis

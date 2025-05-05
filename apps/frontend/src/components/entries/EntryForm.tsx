@@ -89,6 +89,7 @@ export default function EntryForm(props: EntryFormProps) {
                     category_id={props.entry.category_id || 1}
                     category_nm={category_nm}
                     categories={props.categories}
+                    label="Category"
                     handleCategoryId={handleCategoryId} />
             </div>
             <div className="grid grid-cols-2 gap-5">

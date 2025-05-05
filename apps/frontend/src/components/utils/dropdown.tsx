@@ -19,29 +19,30 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 import React from "react"
-import { Category } from "@/core/model/Category"
 
-export interface ComboBoxProps {
-  categories: Category[]
-  category_id: number
-  category_nm: string
-  label?: string
-  handleCategoryId: (value: number) => void
+import { ICard } from "@/core/model/ICard"
+
+export interface DropdownProps {
+  registers: ICard[]
+  drop_id: number
+  drop_nm: string
+  label: string
+  handleDropId: (value: number) => void
 }
 
-export default function Combobox(props: ComboBoxProps) {
+export default function Dropdown(props: DropdownProps) {
 
     const [open, setOpen] = React.useState(false)
 
-    const [value, setValue] = React.useState(""+props.category_id)
+    const [value, setValue] = React.useState(""+props.drop_id)
 
     React.useEffect(() => {
-        props.handleCategoryId(parseInt(value)) //props.category_id)
+        props.handleDropId(parseInt(value)) 
     }, [value]); 
     
     return (
-    <>
-    <div className="flex items-center space-x-4"><p className="text-sm text-muted-foreground">{props.label}</p>
+    <div className="flex items-center space-x-4">
+      <p className="text-sm text-muted-foreground">{props.label}</p>
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
@@ -51,8 +52,8 @@ export default function Combobox(props: ComboBoxProps) {
           className="w-full justify-between"
         >
           {value
-            ? props.categories.find((category: Category) => ""+category.id === value)?.name
-            : "Select Category..."}
+            ? props.registers.find((item: ICard) => ""+item.id === value)?.label
+            : "Select ..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -69,21 +70,21 @@ export default function Combobox(props: ComboBoxProps) {
           <CommandList>
             <CommandEmpty>No registry found.</CommandEmpty>
             <CommandGroup>
-              {props.categories.map((category: Category) => (
+              {props.registers.map((item: ICard) => (
                 <CommandItem
-                  key={""+category.id}
-                  value={""+category.id}
-                  keywords={[category.name]}
+                  key={""+item.id}
+                  value={""+item.id}
+                  keywords={[item.label]}
                   onSelect={(currentValue) => {
                     setValue(currentValue)
                     setOpen(false)
                   }}
                 >
-                  {category.name} ({category.id})
+                  {item.label} ({item.id})
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === ""+category.id ? "opacity-100" : "opacity-0"
+                      value === ""+item.id ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>
@@ -94,6 +95,5 @@ export default function Combobox(props: ComboBoxProps) {
       </PopoverContent>
     </Popover>
     </div>
-    </>
     )
 }
