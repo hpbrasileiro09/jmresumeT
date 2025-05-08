@@ -94,7 +94,7 @@ export default function TableList(props: TableListProps) {
                 <TableCell className="text-right">{saldo.toFixed(2)}</TableCell>
             </TableRow>
             <TableRow>
-                <TableCell colSpan={6}>Checks</TableCell>
+                <TableCell colSpan={6}>Checks {props.entries.length}</TableCell>
                 <TableCell className="text-right">{vlcheck.toFixed(2)}</TableCell>
             </TableRow>
         </TableFooter>

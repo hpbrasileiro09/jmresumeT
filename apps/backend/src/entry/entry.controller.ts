@@ -127,8 +127,10 @@ export class EntryController {
     @Param('search') search: string,
     @Param('dt_search') dt_search: string,
   ): any {
-    const dt_ini = dt_search;
+    const dt_ini = dt_search.substring(0, 10) + 'T00:00:00.000Z';
     const dt_fim = dt_search.substring(0, 10) + 'T23:59:59.000Z';
+    console.log('dt_ini', dt_ini);
+    console.log('dt_fim', dt_fim);
     if (search.length > 0 && search != 'nothing') {
       return this.prisma.findManyRelated('entry', {
         include: {
@@ -136,6 +138,10 @@ export class EntryController {
         },
         orderBy: [{ dt_entry: 'asc' }, { vl_entry: 'desc' }],
         where: {
+          dt_entry: {
+            gte: dt_ini,
+            lte: dt_fim,
+          },
           OR: [
             { ds_category: { contains: search } },
             { ds_subcategory: { contains: search } },
